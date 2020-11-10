@@ -1,6 +1,7 @@
 import React from 'react';
 // import firebase from 'firebase/app';
 import Signup from './components/Signup';
+import Signin from './components/Signin';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       </header>
       {/* {user && <img src={user.picture.large} alt={user.name.last} />} */}
       <Signup />
+      <Signin />
     </div>
   );
 }
