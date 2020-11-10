@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import AuthComponents from './components/AuthComponents';
+import NewPost from './components/NewPost';
+import PostsList from './components/PostsList';
 import './App.css';
 
 function App() {
@@ -36,15 +38,17 @@ function App() {
 
   if (!ready) return <div>loading...</div>;
 
+  if (!user) {
+    return <AuthComponents />;
+  }
+
   return (
     <div className="App">
-      {user ? (
-        <button type="button" onClick={handleSignout}>
-          Sign out {user.email}
-        </button>
-      ) : (
-        <AuthComponents />
-      )}
+      <button type="button" onClick={handleSignout}>
+        Sign out {user.email}
+      </button>
+      <NewPost />
+      <PostsList />
     </div>
   );
 }
