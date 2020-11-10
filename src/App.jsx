@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
-import Signup from './components/Signup';
-import Signin from './components/Signin';
+import AuthComponents from './components/AuthComponents';
 import './App.css';
 
 function App() {
+  const [ready, setReady] = useState(false);
   const [user, setUser] = useState(null);
   useEffect(() => {
     // Get a reference to the database service
@@ -28,26 +28,23 @@ function App() {
       } else {
         setUser(null);
       }
+      setReady(true);
     });
   }, []);
 
   const handleSignout = () => firebase.auth().signOut();
 
+  if (!ready) return <div>loading...</div>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>React starter template</h1>
-      </header>
-      {user && (
-        <p>
-          {user.uid} {user.email}
-        </p>
+      {user ? (
+        <button type="button" onClick={handleSignout}>
+          Sign out {user.email}
+        </button>
+      ) : (
+        <AuthComponents />
       )}
-      <button type="button" onClick={handleSignout}>
-        Sign out
-      </button>
-      <Signup />
-      <Signin />
     </div>
   );
 }

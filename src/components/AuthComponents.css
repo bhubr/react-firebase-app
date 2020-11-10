@@ -1,0 +1,7 @@
+.AuthComponents {
+  display: flex;
+}
+
+.AuthComponents > form {
+  margin: 1em;
+}
